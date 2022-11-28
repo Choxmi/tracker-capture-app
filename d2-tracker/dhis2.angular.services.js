@@ -4061,6 +4061,12 @@ var d2Services = angular.module('d2Services', ['ngResource'])
             });
             return orgUnitTreePromise;
         },
+        getAllOrgUnits: function(name){            
+            var promise = $http.get( DHIS2URL + '/organisationUnits.json?paging=false&fields=id,displayName,path,level,children[id,displayName,path,level,children[id]]').then(function(response){
+                return response.data;
+            });
+            return promise;        
+        },
         getOrgUnit: function(uid) {
             var def = $q.defer();
             var selectedOrgUnit = CurrentSelection.get()["orgUnit"];//SessionStorageService.get('SELECTED_OU');

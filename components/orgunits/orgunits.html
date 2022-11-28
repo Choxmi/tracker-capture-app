@@ -1,0 +1,56 @@
+{{widget.title}}
+<div ng-controller="OrgUnitsController" widget-title="{{widget.title}}" widget="{{widget}}">
+    <div class="panel panel-default-custom">
+        <!--ng-if="showKeyDataSection || showTextSection">-->
+        <div class="panel-heading handle bold">
+            {{widgetTitleLabel}}
+            <span class="pull-right">
+                <a class="small-horizontal-spacing" href ng-click="expandCollapse(this.widget)">
+                    <span ng-show="this.widget.expand"><i class="fa fa-chevron-up" title="{{collapseLabel}}"></i></span>
+                    <span ng-show="!this.widget.expand"><i class="fa fa-chevron-down"
+                            title="{{expandLabel}}"></i></span>
+                </a>
+                <a ng-show="userAuthority.canAdministerDashboard || !lockedList[selectedProgram.id]"
+                    class="small-horizontal-spacing" href ng-click="removeWidget(this.widget)"
+                    title="{{removeLabel}}"><i class="fa fa-times-circle"></i></a>
+            </span>
+        </div>
+        <div ng-show="this.widget.expand" class="panel-body dashboard-widget-container">
+            <div>
+                <table class="dhis2-list-table-striped default-form-table">
+                    <tr>
+                        <td>
+                            <span>
+                                <label>Current Organizational Unit</label>
+                            </span>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" ng-attr-value={{selectedEnrollment.orgUnitName}}
+                                ng-disabled="true" />
+                        </td>
+                    </tr>
+                    <tr ng-repeat="attribute in attributes | filter: {attribute: 'true'} ">
+                        <td>
+                            <span>
+                                <label>Change To</label>
+                            </span>
+                        </td>
+                        <td>
+                            <d2-option-list d2-model="selectedTei" d2-model-id="attribute.id"
+                                d2-required="attributeIsRequired(attribute.id, attribute.mandatory)"
+                                d2-disabled="attributeFieldDisabled(attribute)"
+                                d2-change="selectOrgUnit(selectedTei)"
+                                d2-option-filter="optionVisibility" d2-max-option-size="maxOptionSize"
+                                d2-all-options="optionSets[attributesById[attribute.id].optionSet.id].options">
+                            </d2-option-list>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <button type="button" class="btn btn-primary" ng-click="updateOrgUnit()">
+                    Change
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

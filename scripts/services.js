@@ -55,6 +55,7 @@ var trackerCaptureServices = angular.module('trackerCaptureServices', ['ngResour
     w.enrollmentWidget = {title: 'enrollment', view: "components/enrollment/enrollment.html", show: true, expand: true, parent: 'biggerWidget', order: 0};
     w.indicatorWidget = {title: 'indicators', view: "components/rulebound/rulebound.html", show: true, expand: true, parent: 'biggerWidget', order: 1, canBeUsedAsTopBar: true, topBarView: "components/rulebound/rulebound-topbar.html#indicators"};
     w.dataentryWidget = {title: 'dataentry', view: "components/dataentry/dataentry.html", show: true, expand: true, parent: 'biggerWidget', order: 2};
+    w.orgunitWidget = {title: 'Organizational Unit', view: "components/orgunits/orgunits.html", show: true, expand: true, parent: 'smallerWidget', order: 3};
     w.dataentryTabularWidget = {title: 'dataentryTabular', view: "components/dataentry/dataentry-tabular-layout.html", show: false, expand: true, parent: 'biggerWidget', order: 3};
     w.reportWidget = {title: 'report', view: "components/report/tei-report.html", show: true, expand: true, parent: 'biggerWidget', order: 4};
     w.selectedWidget = {title: 'current_selections', view: "components/selected/selected.html", show: false, expand: true, parent: 'smallerWidget', order: 0};

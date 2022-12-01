@@ -7,7 +7,7 @@ trackerCapture.controller('OrgUnitsController',
         $scope,
         $translate,
         CurrentSelection,
-        RegistrationService,
+        EnrollmentService,
         OrgUnitFactory,) {
 
         $scope.widget = $rootScope.getCurrentWidget($scope);
@@ -60,18 +60,14 @@ trackerCapture.controller('OrgUnitsController',
             }
         }
 
-        $scope.updateOrgUnit = () => {
+        $scope.updateOrgUnit = async () => {
             const cur = CurrentSelection.currentSelection;
             cur.tei.orgUnit = $scope.changeOrg.code;
             for (let i = 0; i < cur.tei.enrollments.length; i++) {
                 cur.tei.enrollments[i].orgUnit = $scope.changeOrg.code;
                 cur.tei.enrollments[i].orgUnitName = $scope.changeOrg.displayName;
+                const res = await EnrollmentService.update(cur.tei.enrollments[i]);
             }
-            console.log(cur.tei);
-            RegistrationService.registerOrUpdate(cur.tei, cur.optionSets, CurrentSelection.attributesById, cur.selectedEnrollment.program)
-                .then((res) => {
-                    console.log("RESULT", res);
-                })
-                .catch((e) => { console.log("ERR SERV", e); });
+            window.location.reload();
         }
     });
